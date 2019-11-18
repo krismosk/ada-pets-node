@@ -12,22 +12,29 @@ const listPets = () => {
   axios.get(BASE_URL)
     .then((response) => { 
       setResult(response.data);
-      // setResult();
     })
     .catch((error) => {
       setError("Error!");
     });
 }
 
-listPets();
+// listPets();
 const showDetails = (selectedPet) => {
   if (!selectedPet) {
     setError("You tried to show details for a pet without selecting it!");
     return;
   }
 
-  // Fill out as part of Wave 2.
+  axios.get(`https://petdibs.herokuapp.com/pets/${selectedPet}`)
+    .then((response) => {
+      setResult(response.data);
+    })
+    .catch((error) => {
+      setError("failed details");
+    });
 }
+
+console.log(showDetails(4));
 
 const removePet = (selectedPet) => {
   if (!selectedPet) {
