@@ -41,8 +41,14 @@ const removePet = (selectedPet) => {
     setError("You tried to remove a pet without selecting it!");
     return;
   }
-
-  // Fill out as part of Wave 3.
+  
+  axios.delete(`https://petdibs.herokuapp.com/pets/${selectedPet}`)
+    .then((response) => {
+      setResult(response.data);
+    })
+    .catch((error) => {
+      setError("failed remove");
+    });
 }
 
 const addPet = (petInfo) => {
